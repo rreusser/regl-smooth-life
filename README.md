@@ -8,6 +8,8 @@ It's pretty inefficient since it's brute-forcing the convolution. It's unrolling
 
 See demo at: [http://rickyreusser.com/regl-smooth-life](http://rickyreusser.com/regl-smooth-life)
 
+But for a better implementation, see: [smoothnacl](https://github.com/binji/smoothnacl/) from the [PNaCl Demos](https://gonativeclient.appspot.com/demo) site.
+
 ### References
 
 Rafler, Stephan (2011). "[Generalization of Conway's "Game of Life" to a continuous domain - SmoothLife](http://arxiv.org/abs/1111.1567)". [arXiv:1111.1567v2](http://arxiv.org/abs/1111.1567).
