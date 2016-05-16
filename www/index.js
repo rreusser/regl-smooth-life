@@ -35,7 +35,6 @@ var panel = control([
   {type: 'range', label: 'alpha_m', min: 0, max: 1, initial: settings.alpha_m},
   {type: 'range', label: 'dt', min: 0, max: 0.2, initial: settings.dt},
 ], {
-  title: 'regl-smooth-life',
   theme: 'dark',
   width: 512
 });
