@@ -1,0 +1,4 @@
+dist
+*.log
+lib-cov
+node_modules
