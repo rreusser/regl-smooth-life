@@ -4,10 +4,8 @@ var regl = require('regl')(document.getElementById('sim'), {pixelRatio: 1});
 var control = require('control-panel');
 
 var settings = {
-  b1: 0.269,
-  b2: 0.34,
-  d1: 0.523,
-  d2: 0.746,
+  birth: [0.269, 0.34],
+  death: [0.523, 0.746],
   alpha_n: 0.028,
   alpha_m: 0.147,
   initial_fill: 0.51,
@@ -27,10 +25,8 @@ var Ninv = 1.0 / areaa
 var panel = control([
   {type: 'button', label: 'restart', action: restart },
   {type: 'range', label: 'initial_fill', min: 0, max: 1, initial: settings.initial_fill},
-  {type: 'range', label: 'b1', min: 0, max: 1, initial: settings.b1},
-  {type: 'range', label: 'b2', min: 0, max: 1, initial: settings.b2},
-  {type: 'range', label: 'd1', min: 0, max: 1, initial: settings.d1},
-  {type: 'range', label: 'd2', min: 0, max: 1, initial: settings.d2},
+  {type: 'interval', label: 'birth', min: 0, max: 1, initial: settings.birth},
+  {type: 'interval', label: 'death', min: 0, max: 1, initial: settings.death},
   {type: 'range', label: 'alpha_n', min: 0, max: 1, initial: settings.alpha_n},
   {type: 'range', label: 'alpha_m', min: 0, max: 1, initial: settings.alpha_m},
   {type: 'range', label: 'dt', min: 0, max: 0.2, initial: settings.dt},
@@ -221,6 +217,10 @@ var frame = 0;
 
 regl.frame((props, {count}) => {
   frame = count;
+  settings.b1 = settings.birth[0]
+  settings.b2 = settings.birth[1]
+  settings.d1 = settings.death[0]
+  settings.d2 = settings.death[1]
   setupQuad(settings, () => {
     regl.draw();
     updateLife();

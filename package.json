@@ -28,7 +28,7 @@
     "babelify": "^7.3.0",
     "budo-less": "^1.0.1",
     "chai": "^3.5.0",
-    "control-panel": "git@github.com:rreusser/control-panel.git",
+    "control-panel": "git@github.com:rreusser/control-panel.git#merge-it-all",
     "garnish": "^5.2.0",
     "mocha": "^2.4.5"
   },
