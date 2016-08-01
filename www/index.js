@@ -1,6 +1,11 @@
 'use strict';
 
-var regl = require('regl')(document.getElementById('sim'), {pixelRatio: 1});
+var regl = require('regl')({
+  container: document.getElementById('sim'),
+  pixelRatio: 1,
+  optionalExtensions: ['oes_texture_float']
+});
+
 var control = require('control-panel');
 
 var settings = {
@@ -50,27 +55,32 @@ function createInitialConditions () {
       y[4 * (i + RADIUS * j)] = Math.exp((-dx * dx - dy * dy) / ra / ra / 2) + Math.random() * settings.initial_fill;
     }
   }
+  console.log('y.length:', y.length);
   return y;
 }
 
 function restart () {
   state[(frame + 1) % 2]({
-    colorBuffer: regl.texture({
-      radius: RADIUS,
+    color: regl.texture({
+      width: RADIUS,
+      height: RADIUS,
       data: createInitialConditions(),
-      wrap: 'repeat',
+      format: 'rgba',
       type: 'float',
+      wrap: 'repeat',
     }),
   });
 }
 
 const state = (Array(2)).fill().map(() =>
   regl.framebuffer({
-    colorBuffer: regl.texture({
-      radius: RADIUS,
+    color: regl.texture({
+      width: RADIUS,
+      height: RADIUS,
       data: createInitialConditions(),
-      wrap: 'repeat',
+      format: 'rgba',
       type: 'float',
+      wrap: 'repeat',
     }),
     depth: false
   })
@@ -171,7 +181,7 @@ var updateLife = regl({
     gl_FragColor = vec4(clamp(next, 0.0, 1.0), 0, 0, 1);
   }`,
 
-  framebuffer: (props, {count}) => state[(count + 1) % 2]
+  framebuffer: ({tick}) => state[(tick + 1) % 2]
 });
 
 const setupQuad = regl({
@@ -198,7 +208,7 @@ const setupQuad = regl({
   },
 
   uniforms: {
-    prevState: (props, {count}) => state[count % 2].color[0],
+    prevState: ({tick}) => state[tick % 2].color[0],
     b1: regl.prop('b1'),
     b2: regl.prop('b2'),
     d1: regl.prop('d1'),
@@ -215,8 +225,8 @@ const setupQuad = regl({
 
 var frame = 0;
 
-regl.frame((props, {count}) => {
-  frame = count;
+regl.frame(({tick}) => {
+  frame = tick;
   settings.b1 = settings.birth[0]
   settings.b2 = settings.birth[1]
   settings.d1 = settings.death[0]

@@ -13,7 +13,7 @@
     "url": "git://github.com/rreusser/regl-smooth-life-demo.git"
   },
   "scripts": {
-    "start": "budo-less www/index.js:bundle.js --less=www/style.less --live --open --dir www -- -t [ babelify --presets [ es2015 ] ] | garnish",
+    "start": "budo-less www/index.js:bundle.js --less=www/style.less --open --dir www -- -t [ babelify --presets [ es2015 ] ] | garnish",
     "test": "semistandard && mocha",
     "build:clean": "rm -rf dist",
     "build:js": "browserify www/index.js -t [ babelify --presets [ es2015 ] ] | uglifyjs -cm > dist/bundle.js",
@@ -33,7 +33,7 @@
     "mocha": "^2.4.5"
   },
   "dependencies": {
-    "regl": "git@github.com:mikolalysenko/regl.git#gh-pages"
+    "regl": "^0.10.0"
   },
   "semistandard": {
     "globals": [
