@@ -1,12 +1,8 @@
 'use strict';
 
-var regl = require('regl')({
-  container: document.getElementById('sim'),
-  pixelRatio: 1,
-  optionalExtensions: ['oes_texture_float']
-});
-
-var control = require('control-panel');
+var normalizeQueryParams = require('./normalize-query-params');
+var extend = require('util-extend');
+var qs = require('query-string');
 
 var settings = {
   birth: [0.269, 0.34],
@@ -16,6 +12,23 @@ var settings = {
   initial_fill: 0.51,
   dt: 0.115,
 };
+
+extend(settings, normalizeQueryParams(location.hash, {
+  birth: ['Number'],
+  death: ['Number'],
+  alpha_n: 'Number',
+  alpha_m: 'Number',
+  initial_fill: 'Number',
+  dt: 'Number',
+}));
+
+var regl = require('regl')({
+  container: document.getElementById('sim'),
+  pixelRatio: 1,
+  optionalExtensions: ['oes_texture_float']
+});
+
+var control = require('control-panel');
 
 const RADIUS = 256;
 var ra = 12.0;
@@ -41,6 +54,7 @@ var panel = control([
 });
 
 panel.on('input', (data) => {
+  window.location.hash = qs.stringify(settings);
   Object.keys(settings).forEach((key) => settings[key] = data[key]);
 });
 

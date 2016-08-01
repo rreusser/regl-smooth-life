@@ -33,7 +33,9 @@
     "mocha": "^2.4.5"
   },
   "dependencies": {
-    "regl": "^0.10.0"
+    "query-string": "^4.2.2",
+    "regl": "^0.10.0",
+    "util-extend": "^1.0.3"
   },
   "semistandard": {
     "globals": [
