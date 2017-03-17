@@ -2,7 +2,7 @@
 
 > SmoothLife on the GPU, via regl
 
-## Leaving this for reference, but see updated version at: http://rickyreusser.com/demos/smooth-life/
+## Leaving this repo for reference, but see updated version at: http://rickyreusser.com/demos/smooth-life/
 
 A quick implementation of SmoothLife on the GPU using [regl](https://github.com/mikolalysenko/regl). GPGPU has never been so easy. As far as WebGL goes, this is little more than a trivial modification of Mikola's [Game of Life](https://github.com/mikolalysenko/regl/blob/gh-pages/example/life.js) example.
 
